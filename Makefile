@@ -28,7 +28,7 @@ test:
 
 publish: 
 	make package
-	# @npm publish
+	@npm publish
 
 clean:
 	@rm -f -- $(DST) $(DST_MIN) $(ZIP)
