@@ -10,9 +10,8 @@ A Node/JavaScript library for computing pairwise distance metrics.
 * Using npm:  
   `npm install furlong --save`
 
-
-  * or install directly:  
-    `make clean && make package`
+* or install directly:  
+  `make clean && make package`
 
 ## Usage
 
@@ -30,7 +29,7 @@ Distance functions can be called directly, which return a scaler value:
 >>> furlong.euclidean([0,0,0],[0,0,100])
 100
 ```
-Accessor functions can be used for more complex data structures
+Accessor functions can be used for more complex data structures:
 ```
 >>> var distanceFunc = furlong.distance('chebyshev')
                          .x(function(d) { return d.foo })
@@ -52,10 +51,9 @@ furlong provides several distances functions and also supports user defined func
 
 `furlong.distance` is a higher-order function that returns a function. If two arguments are passed to it, the function assumes the first argument is one vector and the second argument is the second vector. The `x` accessor operates on the first vector, while the `y` accessor operates on the second vector. If one argument is passed to the fuction, furlong assumes that both accessors operate on the same vector:
 
-```
 Custom distance functions can be used with furlongs accessors as well:
-```
 
+```
 var myDistanceFunc = function(v1, v2) { return 0 }
 
 // generate a custom distance function
@@ -63,14 +61,14 @@ var hammingFunc = furlong.distance(myDistanceFunc)
 console.log(hammingFunc([0,0],[100,100]) // distance = 0
 ```
 
-## Tests
+## Testing
 
 * Using npm:  
   `npm test`
 
 
-  * or test directly  
-    `make test`
+* or test directly  
+  `make test`
 
 ## Release History
 
