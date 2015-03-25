@@ -1,0 +1,35 @@
+{
+  "name": "furlong",
+  "version": "0.1.0",
+  "description": "A JavaScript library for computing pairwise distance metrics",
+  "keywords": [
+    "statistics",
+    "distance",
+    "euclidean",
+    "manhattan",
+    "braycurtis",
+    "chebyshev",
+    "canberra"
+  ],
+  "main": "lib/main",
+  "browserify": "lib/furlong.js",
+  "devDependencies": {
+    "browserify": "^9.0.3",
+    "mocha": "^2.1.0",
+    "uglify-js": "^2.4.16"
+  },
+  "scripts": {
+    "test": "mocha --reporter nyan"
+  },
+  "author": "Seth Brown <sethbrown@drbunsen.org> (http://www.drbunsen.org)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/drbunsen/furlong.git"
+  },
+  "licenses": [
+    {
+      "type": "BSD",
+      "url": "https://github.com/drbunsen/furlong/blob/master/LICENSE"
+    }
+  ]
+}
