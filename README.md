@@ -11,11 +11,11 @@ A Typescript library for computing pairwise distance metrics in the browser or w
 
 ## Usage
 
-furlong can be used with Node or with plain Javascript; it has no external dependencies. To use with Node, simply require it:
-`const pairwiseDistance = require('furlong').pairwiseDistance`
+furlong can be used with Node or with plain Javascript; it has no external dependencies. To use with Node, simply require it:  
+```const pairwiseDistance = require('furlong').pairwiseDistance```
 
-To use in Javascript, just import it:
-`import { pairwiseDistance } from 'furlong'`
+To use in Javascript, just import it:  
+```import { pairwiseDistance } from 'furlong'```
 
 Distance functions can be called directly using the value method, which return a scaler value:
 
