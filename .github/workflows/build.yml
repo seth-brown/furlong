@@ -1,6 +1,6 @@
 # https://www.prestonlamb.com/blog/creating-a-docker-image-with-github-actions
 
-name: build
+name: Build Status
 
 on: [push]
 
