@@ -3,6 +3,8 @@ furlong
 
 A Typescript library for computing pairwise distance metrics in the browser or with node.
 
+![Furlong CI](https://github.com/seth-brown/furlong/workflows/Furlong%20CI/badge.svg?branch=master)
+
 ![](furlong.jpg)
 
 ## Installation
