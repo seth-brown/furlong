@@ -7,11 +7,7 @@ A Typescript library for computing pairwise distance metrics in the browser or w
 
 ## Installation
 
-* Using npm:  
-  `npm install furlong --save`
-
-* or install directly:  
-  `make clean && make package`
+`npm install furlong --save`
 
 ## Usage
 
