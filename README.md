@@ -1,7 +1,7 @@
 furlong
 =========
 
-A Node/JavaScript library for computing pairwise distance metrics.
+A Typescript library for computing pairwise distance metrics in the browser or with node.
 
 ![](furlong.jpg)
 
@@ -16,31 +16,31 @@ A Node/JavaScript library for computing pairwise distance metrics.
 ## Usage
 
 furlong can be used with Node or with plain Javascript; it has no external dependencies. To use with Node, simply require it:
-```
-var furlong = require('furlong')
-```
-To use in the browser, link directly to it:
-```
-<script src="dist/furlong.min.js" charset="utf-8"></script>
-```
+`const pairwiseDistance = require('furlong').pairwiseDistance`
 
-Distance functions can be called directly, which return a scaler value:
-```
->>> furlong.euclidean([0,0,0],[0,0,100])
+To use in Javascript, just import it:
+`import { pairwiseDistance } from 'furlong'`
+
+Distance functions can be called directly using the value method, which return a scaler value:
+
+``` 
+>>> pairwiseDistance('euclidean').distance([0,0,0],[0,0,100])
 100
 ```
+
 Accessor functions can be used for more complex data structures:
 ```
->>> var distanceFunc = furlong.distance('chebyshev')
-                         .x(function(d) { return d.foo })
-                         .y(function(d) { return d.bar })
+>>> const distanceFunc = pairwiseDistance('chebyshev')
+                     .x(d => d.foo)
+                     .y(d => d.bar})
 
->>> var a = [{'foo': 12, 'bar': 6},{'foo': 7, 'bar': 32},{'foo': 0, 'bar': 27}]
->>> distanceFunc(a)
+>>> const vectorA = [{'foo': 12},{'foo': 7},{'foo': 0}]
+>>> const vectorB = [{'bar': 6},{'bar': 32},{'bar': 27}]
+>>> distanceFunc.distance(vectorA, vectorB)
 27
 ```
 
-furlong provides several distances functions and also supports user defined functions. The provided distance functions include:
+furlong provides several built-in distances functions and also supports user defined functions. The provided distance functions include:
 
 * Euclidean distance
 * Manhattan distance
@@ -49,16 +49,14 @@ furlong provides several distances functions and also supports user defined func
 * Canberra distance 
 * Hamming distance
 
-`furlong.distance` is a higher-order function that returns a function. If two arguments are passed to it, the function assumes the first argument is one vector and the second argument is the second vector. The `x` accessor operates on the first vector, while the `y` accessor operates on the second vector. If one argument is passed to the fuction, furlong assumes that both accessors operate on the same vector:
-
 Custom distance functions can be used with furlongs accessors as well:
 
 ```
-var myDistanceFunc = function(v1, v2) { return 0 }
-
-// generate a custom distance function
-var hammingFunc = furlong.distance(myDistanceFunc) 
-console.log(hammingFunc([0,0],[100,100]) // distance = 0
+>>> const customDistanceFunc = (v1, v2) => 0
+>>> pairwiseDistance('hamming')
+    .func(customDistanceFunc)
+    .distance([0,0],[1,1])
+0
 ```
 
 ## Testing
@@ -66,10 +64,7 @@ console.log(hammingFunc([0,0],[100,100]) // distance = 0
 * Using npm:  
   `npm test`
 
-
-* or test directly  
-  `make test`
-
 ## Release History
 
 * 0.1.0 Initial release
+* 0.2.0 Ported library to Typescript

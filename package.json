@@ -1,35 +1,48 @@
 {
   "name": "furlong",
-  "version": "0.1.0",
-  "description": "A JavaScript library for computing pairwise distance metrics",
+  "version": "0.2.1",
+  "description": "A Typescript/JS/node library for computing pairwise distance metrics",
+  "author": "Seth Brown <hello@seth-brown.net>",
   "keywords": [
     "statistics",
     "distance",
+    "pairwise",
     "euclidean",
     "manhattan",
     "braycurtis",
     "chebyshev",
     "canberra"
   ],
-  "main": "lib/main",
-  "browserify": "lib/furlong.js",
-  "devDependencies": {
-    "browserify": "^9.0.3",
-    "mocha": "^2.1.0",
-    "uglify-js": "^2.4.16"
-  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
-    "test": "mocha --reporter nyan"
+    "test": "jest",
+    "build": "tsc",
+    "prepublish": "npm run build",
+    "version" : "npm run format && git add -A src",
+    "postversion" : "git push && git push --tags"
   },
-  "author": "Seth Brown <sethbrown@drbunsen.org> (http://www.drbunsen.org)",
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "jest": "^25.3.0",
+    "ts-jest": "^25.3.1",
+    "typescript": "^3.8.3",
+    "@types/node": "^13.11.1"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/drbunsen/furlong.git"
+    "url": "https://github.com/seth-brown/furlong.git"
   },
   "licenses": [
     {
       "type": "BSD",
-      "url": "https://github.com/drbunsen/furlong/blob/master/LICENSE"
+      "url": "https://github.com/seth-brown/furlong/blob/master/LICENSE"
     }
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
