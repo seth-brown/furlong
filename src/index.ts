@@ -15,7 +15,7 @@ type PairwiseVectors = {v1: Vector, v2: Vector}
 /* PairwiseDistance implements a closure over several free variables, namely, a
  * distance function and optional accessor functions, x and y.
  */ 
-export function pairwiseDistance(d:Distance) {
+export function furlong(d:Distance) {
 
   let distFn = d === undefined ? metrics['euclidean'] : metrics[d]
   let fx:any

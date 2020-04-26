@@ -1,5 +1,3 @@
-# https://www.prestonlamb.com/blog/creating-a-docker-image-with-github-actions
-
 name: Build Status
 
 on: [push]
@@ -8,7 +6,6 @@ jobs:
   github:
     runs-on: ubuntu-latest    
     steps:
-      # checkout our code to use for the build
       - uses: actions/checkout@v1
       - name: setup node
         uses: actions/setup-node@v1
