@@ -1,8 +1,8 @@
 {
   "name": "furlong",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A Typescript/JS/node library for computing pairwise distance metrics",
-  "author": "Seth Brown <hello@seth-brown.net>",
+  "author": "Seth Brown <software@seth-brown.net>",
   "keywords": [
     "statistics",
     "distance",
