@@ -1,52 +1,70 @@
 import * as metrics from './metrics'
 
-const metricNames = [ 'euclidean'
-                    , 'manhattan'
-                    , 'braycurtis'
-                    , 'chebyshev'
-                    , 'canberra'
-                    , 'hamming'
-                    ] as const;
+import { Distance, Vector } from './protocols'
 
-type Distance = typeof metricNames[number] | void
-type Vector = any[]
-type PairwiseVectors = {v1: Vector, v2: Vector}
+import { isVec } from './utils'
+import { metricNames } from './metrics'
 
-/* PairwiseDistance implements a closure over several free variables, namely, a
- * distance function and optional accessor functions, x and y.
- */ 
-export function furlong(d:Distance) {
-
+export const furlong = (d: Distance) => {
   let distFn = d === undefined ? metrics['euclidean'] : metrics[d]
-  let fx:any
-  let fy:any
+  let fx: unknown
+  let fy: unknown
 
-  function g(x:Vector, y:Vector) {
+  function g<
+    VecObj1 extends Record<VecKey1, number>,
+    VecKey1 extends keyof VecObj1,
+    VecObj2 extends Record<VecKey2, number>,
+    VecKey2 extends keyof VecObj2
+  >(x: VecObj1[], y: VecObj2[]) {
     return g.distance(x, y)
   }
 
-  g.distance = function(x:Vector, y:Vector) {
-    if (x.length !== y.length) 
+  g.distance = function <
+    VecObj1 extends Record<VecKey1, number>,
+    VecKey1 extends keyof VecObj1,
+    VecObj2 extends Record<VecKey2, number>,
+    VecKey2 extends keyof VecObj2
+  >(x: VecObj1[] | Vector, y: VecObj2[] | Vector) {
+    type Accessor1 = (v: VecObj1) => number
+    type Accessor2 = (v: VecObj2) => number
+    if (x.length !== y.length)
       throw new RangeError('Vectors must be of equivalent length')
-    return (fx && fy)
-      ? distFn(x.map(fx), y.map(fy)) 
-      : distFn(x, y)
+    const hasAccessors = fx !== undefined && fy !== undefined
+    const isVecs = isVec(x) && isVec(y)
+    const notVecs = !isVec(x) && !isVec(y)
+    if (isVecs) {
+      x = x as Vector
+      y = y as Vector
+      return distFn(x as Vector, y as Vector)
+    } else if (hasAccessors && notVecs) {
+      x = x as VecObj1[]
+      y = y as VecObj2[]
+      fx = fx as Accessor1
+      fy = fy as Accessor2
+      return distFn(x.map(fx as Accessor1), y.map(fy as Accessor2))
+    } else return 0
   }
 
-  g.x = function(fn:any) {
+  g.x = function <
+    VecObj extends Record<VecKey, number>,
+    VecKey extends keyof VecObj
+  >(fn: (v: VecObj) => number) {
     fx = fn
     return g
   }
 
-  g.y = function(fn:any) {
+  g.y = function <
+    VecObj extends Record<VecKey, number>,
+    VecKey extends keyof VecObj
+  >(fn: (v: VecObj) => number) {
     fy = fn
     return g
   }
 
-  g.func = function(fn:any) {
+  g.func = function (fn: (v1: number[], v2: number[]) => number) {
     distFn = fn
     return g
   }
 
-  return g;
+  return g
 }
